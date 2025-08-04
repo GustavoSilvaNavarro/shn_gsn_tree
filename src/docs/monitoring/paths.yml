@@ -1,0 +1,11 @@
+paths:
+  /healthz:
+    get:
+      tags:
+        - Monitoring
+      summary: Health check endpoint
+      responses:
+        204:
+          description: Success
+        500:
+          $ref: '#/components/responses/UnexpectedError'

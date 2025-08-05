@@ -1,1 +1,1 @@
-export { createNewNode, queryNodes } from './tree';
+export { createNewNode, getAllTrees } from './tree';

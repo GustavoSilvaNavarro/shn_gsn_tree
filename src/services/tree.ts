@@ -1,7 +1,7 @@
 import { sequelize } from '@adapters/db';
 import { Node } from '@adapters/db/models';
 import { BadRequestError } from '@errors';
-import type { NodePayload } from '@interfaces';
+import type { NodePayload, SingleNode, TreeNodeResponse } from '@interfaces';
 
 export const createNewNode = async (payload: NodePayload) => {
   const { label, parentId } = payload;
@@ -17,8 +17,6 @@ export const createNewNode = async (payload: NodePayload) => {
 
 export const queryNodes = async () => {
   // The Recursive CTE query
-  // It traverses the tree in the database and returns a flat result set
-  // that is ordered hierarchically by the generated 'path'.
   const query = `
     WITH RECURSIVE "hierarchy" ("id", "label", "parent_id", "path") AS (
       SELECT
@@ -43,8 +41,36 @@ export const queryNodes = async () => {
     SELECT "id", "label", "parent_id" FROM "hierarchy" ORDER BY "path";
   `;
 
-  // Step 1: Execute the raw query using Sequelize
-  // The 'type: QueryTypes.SELECT' is crucial to get a clean array of objects
-  const results = await sequelize.query(query, { type: 'SELECT' });
+  const results = (await sequelize.query(query, { type: 'SELECT' })) as Array<SingleNode>;
   return results;
+};
+
+const buildNodeMap = (nodes: Array<SingleNode>) => {
+  const map = new Map<number | string, Array<TreeNodeResponse>>();
+
+  for (const node of nodes) {
+    const parent = node.parent_id === null ? 'root' : node.parent_id;
+
+    if (!map.has(parent)) map.set(parent, []);
+    map.get(parent)?.push({ id: node.id, label: node.label, children: [] });
+  }
+  return map;
+};
+
+const buildTreeFromMap = (nodeList: Array<TreeNodeResponse>, map: Map<number | string, Array<TreeNodeResponse>>) => {
+  for (const node of nodeList) {
+    if (map.has(node.id)) {
+      node.children = buildTreeFromMap(map.get(node.id) ?? [], map);
+    }
+  }
+  return nodeList;
+};
+
+export const getAllTrees = async () => {
+  const nodes = await queryNodes();
+
+  const nodeMap = buildNodeMap(nodes);
+
+  const rootNodes = nodeMap.get('root') ?? [];
+  return buildTreeFromMap(rootNodes, nodeMap);
 };

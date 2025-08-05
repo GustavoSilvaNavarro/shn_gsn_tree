@@ -47,7 +47,7 @@ health-check:
 
 # External services
 run-external-services:
-	docker compose -f ./docker-compose.inf.yml up -d db mongo-express
+	docker compose -f ./docker-compose.inf.yml up -d db
 
 # Docker commands
 build-base:

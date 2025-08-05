@@ -4,8 +4,10 @@ import { Sequelize } from 'sequelize-typescript';
 
 import { Node } from './models';
 
+export let sequelize: Sequelize;
+
 export const connectDb = async () => {
-  const sequelize = new Sequelize({
+  sequelize = new Sequelize({
     host: DB_HOST,
     dialect: 'postgres',
     username: DB_USER,

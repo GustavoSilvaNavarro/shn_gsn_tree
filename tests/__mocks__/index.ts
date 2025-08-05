@@ -1,1 +1,1 @@
-export { expectedMockTree, invalidMockPayload, listOfNodes, mockPayload, rootNodePayload } from './nodeMocks';
+export { expectedMockTree, invalidMockPayload, listOfNodes, mockPayload, rootNodePayload, seeData } from './nodeMocks';

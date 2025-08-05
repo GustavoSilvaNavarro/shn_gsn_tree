@@ -1,17 +1,15 @@
 import { Agent } from 'node:http';
 
+import { clearAllTables, connectTestDb, sequelizeTestConnection } from '@tests/helpers';
 import axios from 'axios';
 
 axios.defaults.httpAgent = new Agent({ keepAlive: false });
 
-beforeAll(() => {
-  return;
-});
-
-afterEach(async () => {
-  return;
+beforeAll(async () => {
+  await connectTestDb();
 });
 
 afterAll(async () => {
-  return;
+  await clearAllTables();
+  await sequelizeTestConnection.close();
 });

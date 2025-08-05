@@ -3,6 +3,8 @@ import { Node } from '@adapters/db/models';
 import { BadRequestError } from '@errors';
 import type { NodePayload, SingleNode, TreeNodeResponse } from '@interfaces';
 
+const ROOT_KEY = 'root';
+
 export const createNewNode = async (payload: NodePayload) => {
   const { label, parentId } = payload;
 
@@ -49,7 +51,7 @@ const buildNodeMap = (nodes: Array<SingleNode>) => {
   const map = new Map<number | string, Array<TreeNodeResponse>>();
 
   for (const node of nodes) {
-    const parent = node.parent_id === null ? 'root' : node.parent_id;
+    const parent = node.parent_id === null ? ROOT_KEY : node.parent_id;
 
     if (!map.has(parent)) map.set(parent, []);
     map.get(parent)?.push({ id: node.id, label: node.label, children: [] });
@@ -71,6 +73,6 @@ export const getAllTrees = async () => {
 
   const nodeMap = buildNodeMap(nodes);
 
-  const rootNodes = nodeMap.get('root') ?? [];
+  const rootNodes = nodeMap.get(ROOT_KEY) ?? [];
   return buildTreeFromMap(rootNodes, nodeMap);
 };

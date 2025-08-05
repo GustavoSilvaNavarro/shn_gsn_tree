@@ -30,6 +30,8 @@ const config: Config.InitialOptions = {
     '^@tests/(.*)$': '<rootDir>/tests/$1',
     '^@interfaces$': '<rootDir>/src/interfaces/index',
     '^@interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
+    '^@mocks/(.*)$': '<rootDir>/tests/__mocks__/$1',
+    '^@mocks$': '<rootDir>/tests/__mocks__/index',
   },
 };
 export default config;

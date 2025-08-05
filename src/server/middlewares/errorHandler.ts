@@ -1,9 +1,11 @@
+import { logger } from '@adapters';
 import { InternalServerError } from '@errors';
 import { CustomError } from '@server/errors/customError';
 import { AxiosError } from 'axios';
 import { NextFunction, Request, Response } from 'express';
 
 export const errorHandler = (error: Error | CustomError, _req: Request, res: Response, _0: NextFunction): unknown => {
+  logger.error('Error: ', error);
   if (!(error instanceof CustomError)) {
     const statusError = (error as AxiosError).response?.status;
     const message =

@@ -1,0 +1,69 @@
+
+components:
+  schemas:
+    TreeNode:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the node.
+          example: 1
+        label:
+          type: string
+          description: The label or name of the node.
+          example: "root"
+        children:
+          type: array
+          description: An array of child nodes.
+          items:
+            $ref: '#/components/schemas/TreeNode'
+      required:
+        - id
+        - label
+        - children
+
+    NewNodePayload:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The label or name for the new node.
+          example: "gsn"
+        parentId:
+          type: integer
+          format: int64
+          nullable: true
+          description: The ID of the parent node. Omit or set to null for a root node.
+          example: 2
+      required:
+        - label
+
+    NodeResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the created node.
+          example: 4
+        label:
+          type: string
+          description: The label of the created node.
+          example: "gsn"
+        parentId:
+          type: integer
+          format: int64
+          nullable: true
+          description: The ID of the parent node, or null if it's a root node.
+          example: 2
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the node was last updated.
+          example: "2025-08-05T17:17:03.608Z"
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the node was created.
+          example: "2025-08-05T17:17:03.608Z"

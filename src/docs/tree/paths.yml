@@ -1,0 +1,65 @@
+paths:
+  /api/tree:
+    get:
+      tags:
+        - Tree
+      summary: Returns an array of all trees that exist
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreeNode'
+              examples:
+                successfulResponse:
+                  value:
+                    - id: 1
+                      label: "root"
+                      children:
+                        - id: 3
+                          label: "bear"
+                          children:
+                            - id: 4
+                              label: "cat"
+                              children: []
+                        - id: 7
+                          label: "frog"
+                          children: []
+        500:
+          $ref: '#/components/responses/UnexpectedError'
+
+    post:
+      tags:
+        - Tree
+      summary: Creates a new node and attaches it to the specified parent node in the tree
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewNodePayload'
+            examples:
+              createNestedNode:
+                summary: Create a nested node
+                value:
+                  label: "cat's child"
+                  parentId: 4
+              createRootNode:
+                summary: Create a root node
+                value:
+                  label: "new_root_node"
+                  parentId: null
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResponse'
+        400:
+          $ref: '#/components/responses/BadRequestError'
+        500:
+          $ref: '#/components/responses/UnexpectedError'

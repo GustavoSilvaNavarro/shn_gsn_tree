@@ -7,6 +7,7 @@ axios.defaults.httpAgent = new Agent({ keepAlive: false });
 
 beforeAll(async () => {
   await connectTestDb();
+  await clearAllTables();
 });
 
 afterAll(async () => {

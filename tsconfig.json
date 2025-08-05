@@ -50,6 +50,6 @@
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "test-runner/**/*.ts", "db/migrations", "scripts/**/*.ts", "test-runner/alternateProviderTests/jestSetup/reportOnFailedJestTests.js",],
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
   "exclude": ["node_modules"]
 }

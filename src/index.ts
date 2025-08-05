@@ -1,5 +1,3 @@
-// import '@dotenvx/dotenvx/config';
-
 import { logger } from '@adapters';
 import * as Config from '@config';
 import { onExit } from 'signal-exit';
@@ -16,7 +14,7 @@ process.on('unhandledRejection', (err) => logger.error('unhandledRejection', err
 
 // Bootstrap service
 (async () => {
-  const connections = await createConnections();
+  const connections = await createConnections(Config.SEED_TABLE);
   await startServer();
   logger.info(`${Config.NAME} started and running`);
 

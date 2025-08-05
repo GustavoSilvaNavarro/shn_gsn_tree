@@ -1,4 +1,4 @@
-import '@dotenvx/dotenvx/config';
+import { Node } from '@adapters/db/models';
 
 const seedData = [
   { id: 1, label: 'root' },
@@ -9,13 +9,6 @@ const seedData = [
   { id: 6, label: 'John', parentId: 5 },
 ];
 
-import { connectDb } from '../src/adapters/db';
-import { Node } from '../src/adapters/db/models';
-
 export const seedNodeTable = async () => {
-  const sequelize = await connectDb();
-
   await Node.bulkCreate(seedData);
-
-  await sequelize.close();
 };

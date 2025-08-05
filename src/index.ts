@@ -1,4 +1,4 @@
-import '@dotenvx/dotenvx/config';
+// import '@dotenvx/dotenvx/config';
 
 import { logger } from '@adapters';
 import * as Config from '@config';

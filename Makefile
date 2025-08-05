@@ -4,6 +4,18 @@ SERVICE_NAME = tree_api
 CONTAINER_NAME = $(SERVICE_NAME)
 DOCKER_COMPOSE_TAG = $(SERVICE_NAME)_1
 
+# DB Commands
+create-migration:
+	npx node-pg-migrate create '$(m)'
+
+apply-migration:
+	npx node-pg-migrate up -f ./dbConfig.json
+
+migrate-down:
+	npx node-pg-migrate down -f ./dbConfig.json
+
+migrate:
+	npm run migration:up
 
 # Pipeline commands
 setup:

@@ -21,7 +21,6 @@
     "prepare": "husky install",
     "migration:up": "npx node-pg-migrate up",
     "migration:down": "npx node-pg-migrate down"
-
   },
   "author": "Gustavo Silva",
   "dependencies": {
@@ -41,7 +40,8 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.48.4",

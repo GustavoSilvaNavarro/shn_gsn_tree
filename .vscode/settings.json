@@ -15,6 +15,7 @@
     "BASICAUTH",
     "commitready",
     "dotenvx",
+    "dtos",
     "healthcheck",
     "healthz",
     "INITDB",

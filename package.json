@@ -18,7 +18,9 @@
     "lint:fix": "npx eslint src/ tests/ --fix",
     "format": "npx prettier --write src tests",
     "check": "npx prettier --check src tests",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migration:up": "npx node-pg-migrate up",
+    "migration:down": "npx node-pg-migrate down"
   },
   "author": "Gustavo Silva",
   "dependencies": {
@@ -30,11 +32,16 @@
     "express": "^5.1.0",
     "helmet": "^8.0.0",
     "morgan": "^1.10.0",
+    "node-pg-migrate": "^8.0.3",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7",
+    "sequelize-typescript": "^2.1.6",
     "signal-exit": "^4.1.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.48.4",

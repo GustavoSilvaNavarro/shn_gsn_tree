@@ -4,6 +4,18 @@ SERVICE_NAME = tree_api
 CONTAINER_NAME = $(SERVICE_NAME)
 DOCKER_COMPOSE_TAG = $(SERVICE_NAME)_1
 
+# DB Commands
+create-migration:
+	npx node-pg-migrate create '$(m)'
+
+apply-migration:
+	npx node-pg-migrate up -f ./dbConfig.json
+
+migrate-down:
+	npx node-pg-migrate down -f ./dbConfig.json
+
+migrate:
+	npm run migration:up
 
 # Pipeline commands
 setup:
@@ -36,9 +48,6 @@ check:
 format:
 	npm run format
 
-generate-swagger:
-	npm run swagger:generate -- $(URL)
-
 commitready: format unit integration
 
 prready: scan format uncached-unit integration
@@ -48,12 +57,9 @@ check-format: check format
 health-check:
 	curl --location 'http://localhost:$(PORT)/healthz' --verbose
 
-commit-prefix:
-	git commit -m '$(TICKET_PREFIX) $(m)'
-
 # External services
-run-external-services: build-base
-	docker compose -f ./docker-compose.inf.yml up -d redis keycloak mock_services otelcol jaeger
+run-external-services:
+	docker compose -f ./docker-compose.inf.yml up -d db
 
 # Docker commands
 build-base:
@@ -70,7 +76,7 @@ down:
 	docker compose -f ./docker-compose.yml -f ./docker-compose.inf.yml down --remove-orphans
 
 down-rm:
-	docker compose -f ./docker-compose.yml -f ./docker-compose.inf.yml down --remove-orphans --rmi all --volumes
+	docker compose -f ./docker-compose.inf.yml down --remove-orphans --rmi all --volumes
 
 downup: down up
 

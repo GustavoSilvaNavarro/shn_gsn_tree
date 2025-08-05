@@ -10,8 +10,19 @@
   },
   "cSpell.words": [
     "adminjs",
+    "ADMINPASSWORD",
+    "ADMINUSERNAME",
+    "BASICAUTH",
+    "commitready",
     "dotenvx",
+    "dtos",
+    "healthcheck",
     "healthz",
+    "INITDB",
+    "isready",
+    "mypass",
+    "myuser",
+    "prready",
     "qodo"
   ]
 }

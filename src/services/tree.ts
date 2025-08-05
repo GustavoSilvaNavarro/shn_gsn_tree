@@ -47,7 +47,7 @@ export const queryNodes = async () => {
   return results;
 };
 
-const buildNodeMap = (nodes: Array<SingleNode>) => {
+export const buildNodeMap = (nodes: Array<SingleNode>) => {
   const map = new Map<number | string, Array<TreeNodeResponse>>();
 
   for (const node of nodes) {
@@ -59,7 +59,10 @@ const buildNodeMap = (nodes: Array<SingleNode>) => {
   return map;
 };
 
-const buildTreeFromMap = (nodeList: Array<TreeNodeResponse>, map: Map<number | string, Array<TreeNodeResponse>>) => {
+export const buildTreeFromMap = (
+  nodeList: Array<TreeNodeResponse>,
+  map: Map<number | string, Array<TreeNodeResponse>>,
+) => {
   for (const node of nodeList) {
     if (map.has(node.id)) {
       node.children = buildTreeFromMap(map.get(node.id) ?? [], map);
@@ -72,7 +75,6 @@ export const getAllTrees = async () => {
   const nodes = await queryNodes();
 
   const nodeMap = buildNodeMap(nodes);
-
   const rootNodes = nodeMap.get(ROOT_KEY) ?? [];
   return buildTreeFromMap(rootNodes, nodeMap);
 };

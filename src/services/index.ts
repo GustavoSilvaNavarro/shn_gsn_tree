@@ -1,1 +1,1 @@
-export { buildNodeMap, buildTreeFromMap, createNewNode, getAllTrees, queryNodes } from './tree';
+export { buildNodeMap, buildTreeFromMap, cloneTreeIntoSubTree, createNewNode, getAllTrees, queryNodes } from './tree';

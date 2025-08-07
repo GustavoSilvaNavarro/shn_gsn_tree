@@ -1,2 +1,2 @@
 export { monitoringController } from './monitoring';
-export { insertNewNode, retrieveTotalTree } from './tree';
+export { cloneTree, insertNewNode, retrieveTotalTree } from './tree';

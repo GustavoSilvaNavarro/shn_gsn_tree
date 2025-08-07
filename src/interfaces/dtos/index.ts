@@ -1,2 +1,2 @@
-export type { NodePayload } from './nodes.dto';
-export { newNodePayload } from './nodes.dto';
+export type { CloneNodePayload, NodePayload } from './nodes.dto';
+export { newNodePayload, payloadCloneNode } from './nodes.dto';

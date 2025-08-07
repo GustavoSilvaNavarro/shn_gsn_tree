@@ -6,3 +6,10 @@ export const newNodePayload = z.strictObject({
 });
 
 export type NodePayload = z.infer<typeof newNodePayload>;
+
+export const payloadCloneNode = z.strictObject({
+  nodeId: z.int().positive(),
+  parentId: z.int().positive(),
+});
+
+export type CloneNodePayload = z.infer<typeof payloadCloneNode>;

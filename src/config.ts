@@ -11,7 +11,6 @@ export const API_URL = process.env.API_URL || 'http://localhost:8080';
 
 // Adapters
 export const LOG_LEVEL: LOG_LEVELS = (process.env.LOG_LEVEL as LOG_LEVELS) || ENVIRONMENT === 'test' ? 'fatal' : 'info';
-export const SEED_TABLE = process.env.SEED_TABLE === 'true';
 
 // ! DB Config
 export const DB_HOST = process.env.DB_HOST;

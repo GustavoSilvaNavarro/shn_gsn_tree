@@ -23,6 +23,7 @@
     "mypass",
     "myuser",
     "prready",
-    "qodo"
+    "qodo",
+    "sequelize"
   ]
 }

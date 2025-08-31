@@ -14,7 +14,7 @@ process.on('unhandledRejection', (err) => logger.error('unhandledRejection', err
 
 // Bootstrap service
 (async () => {
-  const connections = await createConnections(Config.SEED_TABLE);
+  const connections = await createConnections();
   await startServer();
   logger.info(`${Config.NAME} started and running`);
 

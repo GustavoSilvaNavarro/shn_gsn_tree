@@ -8,8 +8,6 @@ done
 
 >&2 echo "🔥 DB is up - executing command"
 
-export DATABASE_URL=postgres://$DB_USER:$DB_PASSWORD@$DB_HOST:5432/$DB_NAME
-
-sh -c 'npm run migration:up'
+sh -c 'npm run sequelize:migration:up'
 
 exec npm start

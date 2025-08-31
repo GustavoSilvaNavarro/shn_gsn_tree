@@ -1,6 +1,4 @@
-import '@dotenvx/dotenvx/config';
-
-const ENVIRONMENT = process.env.ENVIRONMENT ?? process.env.NODE_ENV ?? 'dev';
+const ENVIRONMENT = process.env.ENVIRONMENT ?? process.env.NODE_ENV ?? 'local';
 
 const localConfig = {
   username: 'postgres',

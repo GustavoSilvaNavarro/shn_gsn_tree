@@ -17,6 +17,29 @@ migrate-down:
 migrate:
 	npm run migration:up
 
+# Sequelize commands
+new-migration-sequelize:
+	npx sequelize-cli migration:generate --name '$(m)'
+
+sequelize-migration-up:
+	npx sequelize-cli db:migrate
+
+sequelize-migration-down:
+	npx sequelize-cli db:migrate:undo
+
+# Seeders
+sequelize-creates-seed:
+	npx sequelize-cli seed:generate --name '$(m)'
+
+sequelize-apply-seeder-all:
+	npx sequelize-cli db:seed:all
+
+sequelize-seeder-down:
+	npx sequelize-cli db:seed:undo
+
+sequelize-seeder-down-all:
+	npx sequelize-cli db:seed:undo:all
+
 # Pipeline commands
 setup:
 	npm install

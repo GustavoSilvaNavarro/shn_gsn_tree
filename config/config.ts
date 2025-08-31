@@ -1,3 +1,4 @@
+// NOTE: Configuration file to run migration using sequelize-cli
 const ENVIRONMENT = process.env.ENVIRONMENT ?? process.env.NODE_ENV ?? 'local';
 
 const localConfig = {
